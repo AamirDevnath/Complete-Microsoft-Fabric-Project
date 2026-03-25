@@ -1,0 +1,57 @@
+<svg width="100%" viewBox="0 0 680 860" xmlns="http://www.w3.org/2000/svg">
+<style>
+.c{font-family:'Courier New',Consolas,monospace;font-size:11.5px}
+.ln{fill:#44475a}.nm{fill:#f8f8f2}.kw{fill:#ff79c6}.fn{fill:#50fa7b}.str{fill:#f1fa8c}.cm{fill:#6272a4}.ty{fill:#8be9fd}
+</style>
+<rect width="680" height="860" fill="#282a36"/>
+<rect width="680" height="40" fill="#1a1b26"/>
+<circle cx="20" cy="20" r="5" fill="#ff5555"/>
+<circle cx="38" cy="20" r="5" fill="#f1fa8c"/>
+<circle cx="56" cy="20" r="5" fill="#50fa7b"/>
+<text x="340" y="25" text-anchor="middle" fill="#6272a4" font-family="'Courier New',Consolas,monospace" font-size="12">department_view.sql</text>
+<line x1="50" y1="40" x2="50" y2="860" stroke="#44475a" stroke-width="0.5"/>
+<text class="c ln" x="44" y="56" text-anchor="end">1</text><text class="c cm" x="58" y="56">-- =====================================================</text>
+<text class="c ln" x="44" y="74" text-anchor="end">2</text><text class="c cm" x="58" y="74">-- View:    department</text>
+<text class="c ln" x="44" y="92" text-anchor="end">3</text><text class="c cm" x="58" y="92">-- Purpose: Employee, department &amp; project reporting</text>
+<text class="c ln" x="44" y="110" text-anchor="end">4</text><text class="c cm" x="58" y="110">-- =====================================================</text>
+<text class="c ln" x="44" y="128" text-anchor="end">5</text>
+<text class="c ln" x="44" y="146" text-anchor="end">6</text><text class="c" x="58" y="146"><tspan class="kw">CREATE VIEW </tspan><tspan class="nm">department </tspan><tspan class="kw">AS</tspan></text>
+<text class="c ln" x="44" y="164" text-anchor="end">7</text>
+<text class="c ln" x="44" y="182" text-anchor="end">8</text><text class="c kw" x="58" y="182">SELECT</text>
+<text class="c ln" x="44" y="200" text-anchor="end">9</text>
+<text class="c ln" x="44" y="218" text-anchor="end">10</text><text class="c cm" x="58" y="218">    -- Employee details</text>
+<text class="c ln" x="44" y="236" text-anchor="end">11</text><text class="c nm" x="58" y="236">    e.employee_id,</text>
+<text class="c ln" x="44" y="254" text-anchor="end">12</text><text class="c" x="58" y="254"><tspan class="nm">    </tspan><tspan class="fn">CONCAT</tspan><tspan class="nm">(</tspan></text>
+<text class="c ln" x="44" y="272" text-anchor="end">13</text><text class="c" x="58" y="272"><tspan class="nm">        </tspan><tspan class="fn">COALESCE</tspan><tspan class="nm">(e.first_name, </tspan><tspan class="str">''</tspan><tspan class="nm">),</tspan></text>
+<text class="c ln" x="44" y="290" text-anchor="end">14</text><text class="c" x="58" y="290"><tspan class="nm">        </tspan><tspan class="str">' '</tspan><tspan class="nm">,</tspan></text>
+<text class="c ln" x="44" y="308" text-anchor="end">15</text><text class="c" x="58" y="308"><tspan class="nm">        </tspan><tspan class="fn">COALESCE</tspan><tspan class="nm">(e.last_name, </tspan><tspan class="str">''</tspan><tspan class="nm">)</tspan></text>
+<text class="c ln" x="44" y="326" text-anchor="end">16</text><text class="c" x="58" y="326"><tspan class="nm">    )                    </tspan><tspan class="kw">AS </tspan><tspan class="nm">full_name,</tspan></text>
+<text class="c ln" x="44" y="344" text-anchor="end">17</text><text class="c nm" x="58" y="344">    e.job_title,</text>
+<text class="c ln" x="44" y="362" text-anchor="end">18</text><text class="c nm" x="58" y="362">    e.salary,</text>
+<text class="c ln" x="44" y="380" text-anchor="end">19</text>
+<text class="c ln" x="44" y="398" text-anchor="end">20</text><text class="c cm" x="58" y="398">    -- Department details</text>
+<text class="c ln" x="44" y="416" text-anchor="end">21</text><text class="c nm" x="58" y="416">    d.Department_Name,</text>
+<text class="c ln" x="44" y="434" text-anchor="end">22</text><text class="c nm" x="58" y="434">    d.Department_ID,</text>
+<text class="c ln" x="44" y="452" text-anchor="end">23</text><text class="c nm" x="58" y="452">    d.Department_Goals,</text>
+<text class="c ln" x="44" y="470" text-anchor="end">24</text><text class="c" x="58" y="470"><tspan class="nm">    </tspan><tspan class="fn">CAST</tspan><tspan class="nm">(d.Department_Budget </tspan><tspan class="kw">AS </tspan><tspan class="ty">FLOAT</tspan><tspan class="nm">)</tspan></text>
+<text class="c ln" x="44" y="488" text-anchor="end">25</text><text class="c" x="58" y="488"><tspan class="nm">        / </tspan><tspan class="fn">COUNT</tspan><tspan class="nm">(e.employee_id) </tspan><tspan class="kw">OVER </tspan><tspan class="nm">(</tspan></text>
+<text class="c ln" x="44" y="506" text-anchor="end">26</text><text class="c" x="58" y="506"><tspan class="nm">            </tspan><tspan class="kw">PARTITION BY </tspan><tspan class="nm">d.Department_ID</tspan></text>
+<text class="c ln" x="44" y="524" text-anchor="end">27</text><text class="c" x="58" y="524"><tspan class="nm">        )                </tspan><tspan class="kw">AS </tspan><tspan class="nm">department_budget_share,</tspan></text>
+<text class="c ln" x="44" y="542" text-anchor="end">28</text>
+<text class="c ln" x="44" y="560" text-anchor="end">29</text><text class="c cm" x="58" y="560">    -- Project details</text>
+<text class="c ln" x="44" y="578" text-anchor="end">30</text><text class="c nm" x="58" y="578">    pa.project_id,</text>
+<text class="c ln" x="44" y="596" text-anchor="end">31</text><text class="c" x="58" y="596"><tspan class="nm">    </tspan><tspan class="fn">COALESCE</tspan><tspan class="nm">(up.project_name, cp.project_name)  </tspan><tspan class="kw">AS </tspan><tspan class="nm">project_name,</tspan></text>
+<text class="c ln" x="44" y="614" text-anchor="end">32</text><text class="c" x="58" y="614"><tspan class="nm">    </tspan><tspan class="kw">CASE</tspan></text>
+<text class="c ln" x="44" y="632" text-anchor="end">33</text><text class="c" x="58" y="632"><tspan class="nm">        </tspan><tspan class="kw">WHEN </tspan><tspan class="nm">up.project_id </tspan><tspan class="kw">IS NOT NULL THEN </tspan><tspan class="str">'Upcoming'</tspan></text>
+<text class="c ln" x="44" y="650" text-anchor="end">34</text><text class="c" x="58" y="650"><tspan class="nm">        </tspan><tspan class="kw">WHEN </tspan><tspan class="nm">cp.project_id </tspan><tspan class="kw">IS NOT NULL THEN </tspan><tspan class="str">'Completed'</tspan></text>
+<text class="c ln" x="44" y="668" text-anchor="end">35</text><text class="c" x="58" y="668"><tspan class="nm">    </tspan><tspan class="kw">END                  AS </tspan><tspan class="nm">status,</tspan></text>
+<text class="c ln" x="44" y="686" text-anchor="end">36</text><text class="c" x="58" y="686"><tspan class="nm">    </tspan><tspan class="fn">COALESCE</tspan><tspan class="nm">(up.project_budget, cp.project_budget) </tspan><tspan class="kw">AS </tspan><tspan class="nm">project_budget</tspan></text>
+<text class="c ln" x="44" y="704" text-anchor="end">37</text>
+<text class="c ln" x="44" y="722" text-anchor="end">38</text><text class="c cm" x="58" y="722">-- Joins</text>
+<text class="c ln" x="44" y="740" text-anchor="end">39</text><text class="c" x="58" y="740"><tspan class="kw">FROM       </tspan><tspan class="nm">employees          e</tspan></text>
+<text class="c ln" x="44" y="758" text-anchor="end">40</text><text class="c" x="58" y="758"><tspan class="kw">LEFT JOIN  </tspan><tspan class="nm">departments        d   </tspan><tspan class="kw">ON  </tspan><tspan class="nm">e.department_id = d.Department_ID</tspan></text>
+<text class="c ln" x="44" y="776" text-anchor="end">41</text><text class="c" x="58" y="776"><tspan class="kw">LEFT JOIN  </tspan><tspan class="nm">project_assignments pa  </tspan><tspan class="kw">ON  </tspan><tspan class="nm">e.employee_id   = pa.employee_id</tspan></text>
+<text class="c ln" x="44" y="794" text-anchor="end">42</text><text class="c" x="58" y="794"><tspan class="kw">LEFT JOIN  </tspan><tspan class="nm">upcoming_projects  up  </tspan><tspan class="kw">ON  </tspan><tspan class="nm">pa.project_id   = up.project_id</tspan></text>
+<text class="c ln" x="44" y="812" text-anchor="end">43</text><text class="c" x="58" y="812"><tspan class="kw">LEFT JOIN  </tspan><tspan class="nm">completed_projects cp  </tspan><tspan class="kw">ON  </tspan><tspan class="nm">pa.project_id   = cp.project_id</tspan></text>
+<text class="c ln" x="44" y="830" text-anchor="end">44</text><text class="c" x="58" y="830"><tspan class="nm">                               </tspan><tspan class="kw">AND </tspan><tspan class="nm">up.project_id   </tspan><tspan class="kw">IS NULL</tspan><tspan class="nm">;</tspan></text>
+</svg>
